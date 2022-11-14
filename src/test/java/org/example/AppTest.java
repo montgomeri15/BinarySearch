@@ -1,38 +1,38 @@
 package org.example;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
-/**
- * Unit test for simple App.
- */
-public class AppTest 
-    extends TestCase
-{
-    /**
-     * Create the test case
-     *
-     * @param testName name of the test case
-     */
-    public AppTest( String testName )
-    {
-        super( testName );
+import static org.assertj.core.api.Assertions.assertThat;
+
+public class AppTest {
+
+    @Test
+    void testCorrectNumberOfBinarySearch() {
+        int[] sortedArr = {1, 2, 3, 4, 5, 6};
+        BinarySearch binarySearch = new BinarySearch();
+        int index = binarySearch.indexOfElement(sortedArr, 3);
+
+        assertThat(index).isEqualTo(2);
     }
 
-    /**
-     * @return the suite of tests being tested
-     */
-    public static Test suite()
-    {
-        return new TestSuite( AppTest.class );
+    @ParameterizedTest
+    @ValueSource(ints = {1, 2, 3, 4, 5, 6})
+    void testAllCorrectNumberOfBinarySearch(int number) {
+        int[] sortedArr = {1, 2, 3, 4, 5, 6};
+        BinarySearch binarySearch = new BinarySearch();
+        int index = binarySearch.indexOfElement(sortedArr, number);
+
+        assertThat(index).isNotEqualTo(-1);
     }
 
-    /**
-     * Rigourous Test :-)
-     */
-    public void testApp()
-    {
-        assertTrue( true );
+    @Test
+    void testIncorrectNumberOfBinarySearch() {
+        int[] sortedArr = {1, 2, 3, 4, 5, 6};
+        BinarySearch binarySearch = new BinarySearch();
+        int index = binarySearch.indexOfElement(sortedArr, 7);
+
+        assertThat(index).isEqualTo(-1);
     }
 }
